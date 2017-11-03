@@ -1,0 +1,50 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>LogReg</title>
+</head>
+<body>
+    <h1>REGISTER</h1>
+    @{
+        if(ViewBag.isregerror == true)
+        {
+            foreach(var error in ViewBag.errors)
+            {
+                if(@error.Errors.Count > 0)
+                {
+                    <p>@error.Errors[0].ErrorMessage</p>
+                }
+            }
+        }
+    }
+    @{
+        if(ViewBag.isregerror2)
+        {
+            <p>@ViewBag.errors</p>
+        }
+    }
+    <form action="/register/" method="post">
+        <label>First Name: <input type="text" name="fname"></label>
+        <label>Last Name: <input type="text" name="lname"></label>
+        <label>Email Address: <input type="email" name="email"></label>
+        <label>Password: <input type="password" name="password"></label>
+        <label>Confirm Password: <input type="password" name="confirmpassword"></label>
+        <input type="submit" value="sSbumit">
+    </form>
+    <h1>LOGIN</h1>
+    @{
+        if(ViewBag.islogerror)
+        {
+            <p>@ViewBag.errors</p>
+        }
+    }
+    <form action="/login/" method="post">
+    <label>Email Address: <input type="email" name="email"></label>
+    <label>Password: <input type="password" name="password"></label>
+    <input type="submit" value="Submit">
+    </form>
+</body>
+</html>

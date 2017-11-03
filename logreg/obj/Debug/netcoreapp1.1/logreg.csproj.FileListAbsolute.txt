@@ -1,0 +1,16 @@
+C:\Users\valmo\OneDrive\Dojo\C#\logreg\bin\Debug\netcoreapp1.1\logreg.deps.json
+C:\Users\valmo\OneDrive\Dojo\C#\logreg\bin\Debug\netcoreapp1.1\logreg.runtimeconfig.json
+C:\Users\valmo\OneDrive\Dojo\C#\logreg\bin\Debug\netcoreapp1.1\logreg.runtimeconfig.dev.json
+C:\Users\valmo\OneDrive\Dojo\C#\logreg\bin\Debug\netcoreapp1.1\logreg.dll
+C:\Users\valmo\OneDrive\Dojo\C#\logreg\bin\Debug\netcoreapp1.1\logreg.pdb
+C:\Users\valmo\OneDrive\Dojo\C#\logreg\obj\Debug\netcoreapp1.1\logreg.AssemblyInfo.cs
+C:\Users\valmo\OneDrive\Dojo\C#\logreg\obj\Debug\netcoreapp1.1\logreg.dll
+C:\Users\valmo\OneDrive\Dojo\C#\logreg\obj\Debug\netcoreapp1.1\logreg.pdb
+C:\Users\valmo\OneDrive\48things\logreg\bin\Debug\netcoreapp1.1\logreg.deps.json
+C:\Users\valmo\OneDrive\48things\logreg\bin\Debug\netcoreapp1.1\logreg.runtimeconfig.json
+C:\Users\valmo\OneDrive\48things\logreg\bin\Debug\netcoreapp1.1\logreg.runtimeconfig.dev.json
+C:\Users\valmo\OneDrive\48things\logreg\bin\Debug\netcoreapp1.1\logreg.dll
+C:\Users\valmo\OneDrive\48things\logreg\bin\Debug\netcoreapp1.1\logreg.pdb
+C:\Users\valmo\OneDrive\48things\logreg\obj\Debug\netcoreapp1.1\logreg.AssemblyInfo.cs
+C:\Users\valmo\OneDrive\48things\logreg\obj\Debug\netcoreapp1.1\logreg.dll
+C:\Users\valmo\OneDrive\48things\logreg\obj\Debug\netcoreapp1.1\logreg.pdb
