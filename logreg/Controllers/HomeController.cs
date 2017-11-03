@@ -66,8 +66,8 @@ namespace logreg.Controllers
 
                 //add to database
                 Users newuser = new Users();
-                newuser.fname = registration.fname;
-                newuser.lname = registration.lname;
+                newuser.name = registration.name;
+                newuser.alias = registration.alias;
                 newuser.email = registration.email;
                 newuser.password = registration.password;
                 _context.Add(newuser);
@@ -89,13 +89,27 @@ namespace logreg.Controllers
         [Route("/dashboard")]
         public IActionResult Dashboard()
         {
+            ViewBag.ispost = false;
             ViewBag.isdata = false;
             //check logged in id
             int? loggedid = HttpContext.Session.GetInt32("logid");
             Users whohere = _context.users.SingleOrDefault(users => users.usersid == (int)loggedid);
             if(loggedid > 0)
             {
+                List<Users> userage = _context.users.Include(users => users.Posts).ThenInclude(users => users.Likes).ToList();
+                foreach(var usering in userage)
+                {
+                    foreach(var post in usering.Posts)
+                    {
+                    ViewBag.ispost = true;
+
+                    }
+                }
+
+                System.Console.WriteLine();
                 ViewBag.user = whohere;
+                ViewBag.userage = userage;
+
                 return View();
             }
             else{
@@ -109,6 +123,81 @@ namespace logreg.Controllers
         {
             HttpContext.Session.Clear();
             return RedirectToAction("Index");
+        }
+        [HttpPost]
+        [Route("/posting/")]
+        public IActionResult Posting(string message)
+        {
+            int? loggedid = HttpContext.Session.GetInt32("logid");
+            Posts thepost = new Posts();
+            thepost.message = message;
+            thepost.usersid = (int)loggedid;
+            thepost.created_at = DateTime.Now;
+            thepost.updated_at = DateTime.Now;
+            _context.Add(thepost);
+            _context.SaveChanges();
+
+            return RedirectToAction("Dashboard");
+        }
+        [HttpGet]
+        [Route("/liking/{pid}")]
+        public IActionResult Liking(int pid)
+        {
+            int? loggedid = HttpContext.Session.GetInt32("logid");
+            List<Likes> nosecondlike = _context.likes.Where(likes => likes.usersid == (int)loggedid && likes.postsid== pid).ToList();
+            if(nosecondlike.Count>0){
+                return RedirectToAction("Dashboard");
+            }
+            Likes newlike = new Likes();
+            newlike.likingit = 1;
+            newlike.postsid = pid;
+            newlike.usersid = (int)loggedid;
+            newlike.created_at = DateTime.Now;
+            newlike.updated_at = DateTime.Now;
+            _context.Add(newlike);
+            _context.SaveChanges();
+            return RedirectToAction("Dashboard");
+        }
+        [HttpGet]
+        [Route("/dashboard/{pid}")]
+        public IActionResult Postlikes(int pid)
+        {
+            ViewBag.islikers = false;
+            Posts postdetails = _context.posts.SingleOrDefault(posts => posts.postsid == pid);
+            List<Likes> wholike = _context.likes.Include(likes => likes.Users).Where(likes => likes.postsid == pid).ToList();
+            Users poster = _context.users.SingleOrDefault(users => users.usersid==postdetails.usersid);
+            if(wholike.Count > 0){
+                ViewBag.islikers = true;
+            }
+            ViewBag.postedby = poster;
+            ViewBag.postmessage = postdetails.message;
+            ViewBag.likers = wholike;
+            return View();
+        }
+
+        [HttpGet]
+        [Route("/users/{uid}")]
+        public IActionResult Userinfo(int uid)
+        {
+            Users personinfo = _context.users.Include(users => users.Posts).Include(users => users.Likes).SingleOrDefault(users => users.usersid == uid);
+            ViewBag.postcount =0;
+            ViewBag.likecount =0;
+            if(personinfo.Posts.Count>0)
+            {
+                foreach(var post in personinfo.Posts)
+                {
+                    ViewBag.postcount++;
+                }
+            }
+            if(personinfo.Likes.Count>0)
+            {
+                foreach(var post in personinfo.Likes)
+                {
+                    ViewBag.likecount++;
+                }
+            }
+            ViewBag.person = personinfo;
+            return View();
         }
         
     }

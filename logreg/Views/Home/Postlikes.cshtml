@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Post info</title>
+</head>
+<body>
+    <a href="/dashboard/">Go To Bright Ideas</a>
+    <a href="/logout/">Logout</a>
+    <h1>Post info</h1>
+    <p>@ViewBag.postedby.alias says:</p>
+    <p>@ViewBag.postmessage</p>
+    <table>
+        <tr>
+            <th>Alias</th>
+            <th>Name</th>
+            
+        </tr>
+    @{
+        if(ViewBag.islikers)
+        {
+            foreach(var liker in ViewBag.likers)
+            {
+                <tr>
+                    <td><a href="/users/@liker.Users.usersid/">@liker.Users.alias</a></td>
+                    <td>@liker.Users.name</td>
+                    
+                </tr>
+            }
+        }
+    }
+    </table>
+</body>
+</html>

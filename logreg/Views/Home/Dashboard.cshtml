@@ -7,7 +7,33 @@
     <title>Dashboard</title>
 </head>
 <body>
-    <h1>Success!! Welcome @ViewBag.user.fname!!</h1>
+    <h1>Success!! Welcome @ViewBag.user.alias!!</h1>
     <a href="/logout/">Log Out Here</a>
+    <form action="/posting/" method="post">
+        <textarea name="message"></textarea>
+        <input type="submit" value="sSsubmit">
+    </form>
+    @{
+        if(ViewBag.ispost)
+        {
+            foreach(var userr in ViewBag.userage)
+            {
+                foreach(var post in userr.Posts)
+                {
+                    <p><a href="/users/@userr.usersid/">@userr.alias</a> says:</p>
+                    <p>@post.message</p>
+                    <a href="/liking/@post.postsid">Like</a>
+                    int count = 0;
+                    foreach(var like in post.Likes)
+                    {
+                        count++;
+                    }
+                    <a href="/dashboard/@post.postsid">@count people like this</a>
+
+                }
+            }
+        }
+    }
+
 </body>
 </html>

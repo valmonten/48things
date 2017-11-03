@@ -8,5 +8,7 @@ namespace logreg.Models
         {
         }
         public DbSet<Users> users {get;set;}
+        public DbSet<Posts> posts {get;set;}
+        public DbSet<Likes> likes {get;set;}
     }
 }
